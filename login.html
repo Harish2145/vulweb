@@ -1,0 +1,13 @@
+<!doctype html>
+<html><head><title>Login</title></head>
+<body style="font-family:monospace;max-width:500px;margin:40px auto">
+<h2>Login</h2>
+{% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+<form method="post">
+  <input name="username" placeholder="username"><br><br>
+  <input name="password" type="password" placeholder="password"><br><br>
+  <button type="submit">Login</button>
+</form>
+<p>Hint: try the classic <code>' OR '1'='1</code> as username.</p>
+<a href="/">home</a>
+</body></html>

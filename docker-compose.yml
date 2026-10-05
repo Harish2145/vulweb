@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  nginx:
+    build: ./nginx
+    container_name: lab_nginx
+    ports:
+      - "8080:80"
+    environment:
+      # Toggle the WAF: "on" or "off". Change this and run:
+      #   docker compose up -d --build nginx
+      - WAF_MODE=off
+    depends_on:
+      - web
+    networks:
+      - edge
+      - internal
+
+  web:
+    build: ./web
+    container_name: lab_web
+    expose:
+      - "5000"
+    environment:
+      - FLASK_DEBUG=1
+    networks:
+      - internal
+    volumes:
+      - uploads:/app/static/uploads
+
+  metadata:
+    build: ./metadata
+    container_name: lab_metadata
+    # Intentionally NOT published to host - only reachable from inside
+    # the docker network, like real cloud instance metadata (169.254.169.254).
+    expose:
+      - "80"
+    networks:
+      - internal
+
+networks:
+  edge:
+    driver: bridge
+  internal:
+    driver: bridge
+    internal: false   # set true to fully block internet egress from web/metadata
+
+volumes:
+  uploads:

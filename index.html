@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head><title>Vuln Lab</title>
+<style>body{font-family:monospace;max-width:800px;margin:40px auto;line-height:1.6}
+code{background:#eee;padding:2px 5px}</style>
+</head>
+<body>
+<h1>🎯 Local Pentest Lab</h1>
+<p>Logged in as: <b>{{ user or "anonymous" }}</b> | <a href="/login">login</a> | <a href="/logout">logout</a></p>
+<p>See <code>CHEATSHEET.md</code> for the full vuln list + PoCs. Quick links:</p>
+<ul>
+<li><a href="/search?q=test">/search?q=</a> - SQLi + reflected XSS</li>
+<li><a href="/comments">/comments</a> - stored XSS</li>
+<li><a href="/greet?name=world">/greet?name=</a> - SSTI</li>
+<li><a href="/profile/import">/profile/import</a> - insecure deserialization</li>
+<li><a href="/ping?host=127.0.0.1">/ping?host=</a> - command injection</li>
+<li><a href="/download?file=report.txt">/download?file=</a> - path traversal</li>
+<li><a href="/api/user/1">/api/user/&lt;id&gt;</a> - IDOR</li>
+<li><a href="/api/token">/api/token</a> (POST) + <a href="/api/admin">/api/admin</a> - JWT alg=none</li>
+<li><a href="/upload">/upload</a> - unrestricted file upload</li>
+<li>/api/xml (POST) - XXE</li>
+<li><a href="/fetch?url=http://metadata/latest/meta-data/iam/security-credentials/lab-role">/fetch?url=</a> - SSRF</li>
+<li><a href="/redirect?next=https://example.com">/redirect?next=</a> - open redirect</li>
+<li>/api/redeem (POST, code=LAB10) - race condition</li>
+<li><a href="/welcome">/welcome</a> (behind nginx :8080) - cache poisoning</li>
+<li><a href="/debug">/debug</a> - info disclosure</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html><head><title>Comments</title></head>
+<body style="font-family:monospace;max-width:600px;margin:40px auto">
+<h2>Comments (stored XSS sink - rendered with |safe)</h2>
+<ul>
+{% for c in comments %}
+  <li><b>{{ c['author'] }}</b>: {{ c['body']|safe }}</li>
+{% endfor %}
+</ul>
+<form method="post">
+  <input name="author" placeholder="name"><br><br>
+  <textarea name="body" placeholder="comment (try <script>alert(1)</script>)"></textarea><br><br>
+  <button type="submit">Post</button>
+</form>
+<a href="/">home</a>
+</body></html>
